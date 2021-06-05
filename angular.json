@@ -84,6 +84,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/material/scss/material-dashboard.scss",
               "src/assets/sass/paper-dashboard.scss"
             ],
             "assets": [

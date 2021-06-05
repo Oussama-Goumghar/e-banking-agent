@@ -7,22 +7,20 @@ export interface RouteInfo {
   title: string;
   icon: string;
   class: string;
+  hasSubMen?:Boolean;
   subMenus?: any
 
 }
 
+// @ts-ignore
 export const ROUTES: RouteInfo[] = [
-  { path: '/Client/Accueil', id: 'Accueil', title: 'Accueil', icon: 'nc-bank', class: '', subMenus:[
-    { path: '/Client/Accueil', id: 'Accueil', title: 'Accueil', icon: 'nc-bank', class: 'ml-3'},
-    { path: '/Client/Accueil', id: 'Accueil', title: 'Accueil', icon: 'nc-bank', class: 'ml-3'}
-  ] },
-  { path: '/Client/Ma_Relation_Banque', id: 'Ma', title: 'Ma Relation Banque', icon: 'nc-diamond', class: '' },
-  { path: '/Client/', id: 'Mes', title: 'Mes Transactions', icon: 'nc-pin-3', class: '' },
-  { path: '/Client/mes-demandes-en-ling', id: 'Mes', title: 'Mes Demandes Ligne', icon: 'nc-bell-55', class: '' },
-  { path: '/user', id: 'Mex', title: 'Me Deconnnecter', icon: 'nc-single-02', class: '' },
-  { path: '/table', id: 'Table', title: 'Table List', icon: 'nc-tile-56', class: '' },
-  { path: '/typography', id: 'Typography', title: 'Typography', icon: 'nc-caps-small', class: '' },
-  { path: '/upgrade', id: 'Upgrade', title: 'Upgrade to PRO', icon: 'nc-spaceship', class: 'active-pro' },
+  { path: '/Agence/Accueil', id: 'Accueil', title: 'Accueil', icon: 'home', class: '', hasSubMen: true,},
+  { path: '/Agence/nos-clients', id: 'Ma', title: 'nos clients', icon: 'supervisor_account', hasSubMen: false, class: ''},
+  { path: '/Agence/ajouter-un-clinet', id: 'Mess', title: 'ajouter un client', icon: 'get_app', class: ''},
+  { path: '/Agence/transactions', id: 'Mes', title: 'Transactions', icon: 'paid', class: '' },
+  { path: '/Agence/Accueil', id: 'Mes', title: 'Me Deconnecter ', icon: 'logout', class: 'active-pro' },
+
+
 ];
 
 @Component({
