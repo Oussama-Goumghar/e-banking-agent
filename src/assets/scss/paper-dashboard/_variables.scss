@@ -71,6 +71,9 @@ $default-body-bg:                 #f4f3ef !default;
 $primary-color:              #51cbce !default;
 $primary-states-color:       darken($primary-color, 10%) !default;
 
+$extern-color:              #6bd098 !default;
+$primary-states-color:       darken($extern-color, 10%) !default;
+
 $success-color:              #6bd098 !default;
 $success-states-color:       darken($success-color, 10%) !default;
 
@@ -121,6 +124,7 @@ $bg-purple:             lighten($purple-color, 7%) !default;
 
 //     brand Colors
 $brand-primary:              $primary-color !default;
+$brand-extern:              $extern-color !default;
 $brand-info:                 $info-color !default;
 $brand-success:              $success-color !default;
 $brand-warning:              $warning-color !default;

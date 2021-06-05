@@ -104,140 +104,71 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
 
-    </div>
-  </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title"> Simple Table</h4>
+    <div class="card ">
+      <div class="card-header ">
+        <h5 class="card-title">Transactions</h5>
       </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class=" text-primary">
-            <th>
-              Name
-            </th>
-            <th>
-              Country
-            </th>
-            <th>
-              City
-            </th>
-            <th class="text-right">
-              Salary
-            </th>
-            </thead>
-            <tbody>
-            <tr>
-              <td>
-                Dakota Rice
-              </td>
-              <td>
-                Niger
-              </td>
-              <td>
-                Oud-Turnhout
-              </td>
-              <td class="text-right">
-                $36,738
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Minerva Hooper
-              </td>
-              <td>
-                Curaçao
-              </td>
-              <td>
-                Sinaai-Waas
-              </td>
-              <td class="text-right">
-                $23,789
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Sage Rodriguez
-              </td>
-              <td>
-                Netherlands
-              </td>
-              <td>
-                Baileux
-              </td>
-              <td class="text-right">
-                $56,142
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Philip Chaney
-              </td>
-              <td>
-                Korea, South
-              </td>
-              <td>
-                Overland Park
-              </td>
-              <td class="text-right">
-                $38,735
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Doris Greene
-              </td>
-              <td>
-                Malawi
-              </td>
-              <td>
-                Feldkirchen in Kärnten
-              </td>
-              <td class="text-right">
-                $63,542
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Mason Porter
-              </td>
-              <td>
-                Chile
-              </td>
-              <td>
-                Gloucester
-              </td>
-              <td class="text-right">
-                $78,615
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Jon Porter
-              </td>
-              <td>
-                Portugal
-              </td>
-              <td>
-                Gloucester
-              </td>
-              <td class="text-right">
-                $98,615
-              </td>
-            </tr>
-            </tbody>
-          </table>
+      <div class="card-body ">
+        <canvas id=chartHours width="400" height="100"></canvas>
+      </div>
+      <div class="card-footer ">
+        <div class="legend">
+          <i class="fa fa-circle text-externe"></i> Externe
+          <i class="fa fa-circle text-danger"></i> Interne
+        </div>
+        <hr>
+        <div class="stats">
+          <i class="fa fa-history"></i> Updated 3 minutes ago
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card ">
+      <div class="card-header ">
+        <h4 class="card-title">Transactions State</h4>
 
+      </div>
+      <div class="card-body ">
+        <canvas id="chartEmail"></canvas>
+      </div>
+      <div class="card-footer ">
+        <div class="legend">
+          <i class="fa fa-circle text-primary"></i> Acomplie
+          <i class="fa fa-circle text-danger"></i> Echoue
+          <i class="fa fa-circle text-gray"></i> bloque
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-title">Clients Statistiques</h5>
+
+      </div>
+      <div class="card-body">
+        <canvas id="speedChart" width="400" height="100"></canvas>
+      </div>
+      <div class="card-footer">
+        <div class="chart-legend">
+          <i class="fa fa-circle text-info"></i> Client Ajoute
+          <i class="fa fa-circle text-warning"></i> Client Abandonne
+        </div>
+        <hr/>
+        <div class="card-stats">
+          <i class="fa fa-check"></i> Data information certified
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

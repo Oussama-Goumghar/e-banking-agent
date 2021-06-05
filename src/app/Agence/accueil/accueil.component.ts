@@ -41,14 +41,7 @@ export class AccueilComponent implements OnInit {
             borderWidth: 3,
             data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420]
           },
-          {
-            borderColor: "#fcc468",
-            backgroundColor: "#fcc468",
-            pointRadius: 0,
-            pointHoverRadius: 0,
-            borderWidth: 3,
-            data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484]
-          }
+
         ]
       },
       options: {
@@ -108,11 +101,10 @@ export class AccueilComponent implements OnInit {
           backgroundColor: [
             '#e3e3e3',
             '#4acccd',
-            '#fcc468',
             '#ef8157'
           ],
           borderWidth: 0,
-          data: [342, 480, 530, 120]
+          data: [200, 500, 300]
         }]
       },
 

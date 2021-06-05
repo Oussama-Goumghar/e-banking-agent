@@ -108,6 +108,10 @@ p{
 a.text-primary:focus, a.text-primary:hover {
   color: $brand-primary !important;
 }
+.text-externe,
+a.text-externe:focus, a.text-externe:hover {
+  color: $brand-extern !important;
+}
 .text-info,
 a.text-info:focus, a.text-info:hover {
   color: $brand-info !important;
