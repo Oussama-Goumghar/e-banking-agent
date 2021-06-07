@@ -4,25 +4,55 @@
     <p class="card-category">Category subtitle</p>
   </div>
   <div class="card-body" >
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" style="margin: 0 auto">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" >
+
+<!--      FIRST ROW}-->
       <div nz-row nzAlign="middle" nzJustify="center">
-        <div nz-col >
+        <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzRequired nzFor="firstName">First Name</nz-form-label>
             <nz-form-control nzErrorTip="enter your first name">
-              <input nz-input formControlName="firstName" id="firstName"/>
+              <input nz-input formControlName="firstName" id="firstName" />
             </nz-form-control>
           </nz-form-item>
         </div>
-        <div nz-col>
+        <div nz-col nzSpan="8">
           <nz-form-item class="form-outline">
             <nz-form-label nzRequired nzFor="lastName">Last Name</nz-form-label>
             <nz-form-control nzErrorTip="enter your last name">
-              <input nz-input formControlName="lastName" id="lastName"/>
+              <input nz-input formControlName="lastName" id="lastName" />
             </nz-form-control>
           </nz-form-item>
         </div>
       </div>
+      <!--      Second ROW}-->
+      <div nz-row  nzJustify="center">
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label  nzFor="email" nzRequired>Email</nz-form-label>
+            <nz-form-control  nzErrorTip="entrer your email">
+              <input nz-input type="email" id="email" formControlName="email" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label nzFor="checkEmail" nzRequired>Confirm Email</nz-form-label>
+            <nz-form-control  [nzErrorTip]="errorTpl">
+              <input nz-input type="email" formControlName="checkEmail" id="checkEmail"/>
+              <ng-template #errorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Please confirm your email!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('confirm')">
+                  Two email that you enter is inconsistent!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <!--      FIRST ROW}-->
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="entrer your phone number">
@@ -40,26 +70,8 @@
           ></textarea>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="entrer your email">
-          <input nz-input type="email" id="email" formControlName="email"/>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkEmail" nzRequired>Confirm Email</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-          <input nz-input type="email" formControlName="checkEmail" id="checkEmail"/>
-          <ng-template #errorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">
-              Please confirm your email!
-            </ng-container>
-            <ng-container *ngIf="control.hasError('confirm')">
-              Two email that you enter is inconsistent!
-            </ng-container>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
+
+
       <div nz-row  nzAlign="middle" nzJustify="center">
         <nz-form-item nz-col [nzGutter]="15">
           <nz-form-control >
@@ -75,6 +87,8 @@
       </div>
 
     </form>
+
+
   </div>
 </div>
 

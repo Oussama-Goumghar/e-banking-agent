@@ -1,0 +1,36 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "lastName": "goumghar",
+      "fistName": "oussama",
+      "email": "oussama@gmail.com",
+      "phone": "0659999998",
+      "address": "Marrakech city"
+    },
+    {
+      "id": 2,
+      "lastName": "erraji",
+      "fistName": "mohamed",
+      "email": "mohamed@gmail.com",
+      "phone": "0659999998",
+      "address": "tamrii city"
+    },
+    {
+      "id": 3,
+      "lastName": "Aarafa",
+      "fistName": "brahim",
+      "email": "brahim@gmail.com",
+      "phone": "0659999998",
+      "address": "agadir city"
+    },
+    {
+      "id": 4,
+      "lastName": "chakiri",
+      "fistName": "houssam",
+      "email": "houssam@gmail.com",
+      "phone": "0659999998",
+      "address": "casablanca city"
+    }
+  ]
+}
