@@ -14,6 +14,7 @@ pipeline {
                  script {
                     try {
                         sh 'docker volume inspect vol_agent'
+                        sh 'rm -rf /var/lib/docker/volumes/vol_agent/_data/**'
                         sh 'cp -rf $(pwd)/dist/* /var/lib/docker/volumes/vol_agent/_data/'
                     }
                     catch (Exception e) {
