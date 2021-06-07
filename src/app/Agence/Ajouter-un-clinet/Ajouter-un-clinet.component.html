@@ -1,2 +1,80 @@
-<p>ajouter-un-clinet work!</p>
+<div class="card">
+  <div class="card-header card-header-warning" style="text-align: center">
+    <h3 class="card-title">Ajouter un client</h3>
+    <p class="card-category">Category subtitle</p>
+  </div>
+  <div class="card-body" >
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" style="margin: 0 auto">
+      <div nz-row nzAlign="middle" nzJustify="center">
+        <div nz-col >
+          <nz-form-item>
+            <nz-form-label nzRequired nzFor="firstName">First Name</nz-form-label>
+            <nz-form-control nzErrorTip="enter your first name">
+              <input nz-input formControlName="firstName" id="firstName"/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col>
+          <nz-form-item class="form-outline">
+            <nz-form-label nzRequired nzFor="lastName">Last Name</nz-form-label>
+            <nz-form-control nzErrorTip="enter your last name">
+              <input nz-input formControlName="lastName" id="lastName"/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="entrer your phone number">
+          <input nz-input type="number" id="phone" formControlName="phone"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="address" nzRequired>Address</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="enter the address">
+          <textarea
+            id="address" formControlName="address"
+            nz-input
+            placeholder="enter the address"
+            [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="entrer your email">
+          <input nz-input type="email" id="email" formControlName="email"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkEmail" nzRequired>Confirm Email</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+          <input nz-input type="email" formControlName="checkEmail" id="checkEmail"/>
+          <ng-template #errorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please confirm your email!
+            </ng-container>
+            <ng-container *ngIf="control.hasError('confirm')">
+              Two email that you enter is inconsistent!
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <div nz-row  nzAlign="middle" nzJustify="center">
+        <nz-form-item nz-col [nzGutter]="15">
+          <nz-form-control >
+            <button type="submit" mat-raised-button class="btn btn-success" (click)="submitForm()"><i class="material-icons">done</i>Register</button>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col [nzGutter]="15">
+          <nz-form-control >
+            <button type="submit" mat-raised-button class="btn btn-danger" (click)="resetForm($event)"><i class="material-icons">delete</i>Reset</button>
+
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+    </form>
+  </div>
+</div>
 

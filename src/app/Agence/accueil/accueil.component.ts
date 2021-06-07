@@ -174,11 +174,14 @@ export class AccueilComponent implements OnInit {
       pointBorderColor: '#51CACF',
       pointRadius: 4,
       pointHoverRadius: 4,
-      pointBorderWidth: 8
+      pointBorderWidth: 8,
+      options: {
+
+      }
     };
 
     var speedData = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["1", "1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
       datasets: [dataFirst, dataSecond]
     };
 
@@ -187,6 +190,12 @@ export class AccueilComponent implements OnInit {
       legend: {
         display: false,
         position: 'top'
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'feb'
+        }
       }
     };
 
