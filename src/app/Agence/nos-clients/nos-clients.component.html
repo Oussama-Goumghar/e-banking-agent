@@ -1,25 +1,43 @@
-<nz-table #nestedTable [nzData]="clients$ | async" [nzPageSize]="10">
-  <thead>
-  <tr>
-    <th>FirstName</th>
-    <th>LastName</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <ng-template ngFor let-data [ngForOf]="nestedTable.data">
-    <tr>
-      <td>{{ data.lastName }}</td>
-      <td>{{ data.fistName }}</td>
-      <td>{{ data.email }}</td>
-      <td>{{ data. phone}}</td>
-      <td>
-        <a (click)="displayAlert()">Approve</a>
-      </td>
-    </tr>
-  </ng-template>
-  </tbody>
-</nz-table>
+<ng-container *ngIf="(clients$ | async) as result" [ngSwitch]="result.dataState">
+<ng-container *ngSwitchCase="DataStateEnum.LOADING">
+  <nz-spin nzTip="Loading...">
+  </nz-spin>
+</ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.Error">
+    <div class="alert alert-danger alert-with-icon">
+      <i class="material-icons" data-notify="icon">error_outline</i>
+      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">  <i class="material-icons">close</i></button>
+      <span data-notify="message">
+        <b>Error</b>{{result.errorMessage}}</span>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+    <nz-table #nestedTable [nzData]="result.data" [nzPageSize]="10">
+      <thead>
+      <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-template ngFor let-data [ngForOf]="nestedTable.data">
+        <tr>
+          <td>{{ data.lastName }}</td>
+          <td>{{ data.fistName }}</td>
+          <td>{{ data.email }}</td>
+          <td>{{ data. phone}}</td>
+          <td>
+            <a (click)="displayAlert()">Approve</a>
+          </td>
+        </tr>
+      </ng-template>
+      </tbody>
+    </nz-table>
 
+
+  </ng-container>
+
+</ng-container>
