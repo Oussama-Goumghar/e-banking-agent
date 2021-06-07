@@ -12,8 +12,20 @@ export class ClientService {
 
   constructor(private http:HttpClient) { }
 
+  saveClient(client:Client):Observable<Client>{
+    let host=environment.host
+   return  this.http.post<Client>(host+"clients",client)
+  }
+
   getAllClients():Observable<Client[]>{
     let host=environment.host
     return this.http.get<Client[]>(host+"clients")
   }
+
+  deleteClient(client:Client){
+    let host=environment.host
+    return this.http.delete(host+"clients/"+client.id)
+  }
+
+
 }

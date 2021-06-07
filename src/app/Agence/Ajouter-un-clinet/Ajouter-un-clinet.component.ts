@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {Client} from '../../Core/Models/client.model';
+import {ClientService} from '../../Core/Services/client.service';
 
 @Component({
   selector: 'app-ma-relation-banque',
@@ -10,7 +12,8 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 export class AjouterUnClinetComponent implements OnInit {
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private message: NzMessageService) {
+
+  constructor(private fb: FormBuilder, private message: NzMessageService,private clientService:ClientService) {
   }
 
   ngOnInit(): void {
@@ -25,12 +28,25 @@ export class AjouterUnClinetComponent implements OnInit {
   }
 
   submitForm(): void {
+
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.message.info('name==' + this.validateForm.controls.lastName.value + ' ' + this.validateForm.controls.firstName.value + 'phone==' + this.validateForm.controls.phone.value)
-    console.log('email==' + this.validateForm.controls.email.value);
+    if (this.validateForm?.invalid) return
+
+    let client:Client = {
+      firstName:this.validateForm.controls.firstName.value,
+      lastName:this.validateForm.controls.lastName.value,
+      phone:this.validateForm.controls.phone.value,
+      address:this.validateForm.controls.address.value,
+      email:this.validateForm.controls.email.value
+    }
+
+    this.clientService.saveClient(client).subscribe(data=>{
+      alert("succsess")
+    })
+
   }
 
 
