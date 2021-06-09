@@ -36,6 +36,10 @@ export class AjouterUnClinetComponent implements OnInit {
 
   submitForm(): void {
 
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
 
     if (this.validateForm?.invalid) return
 
