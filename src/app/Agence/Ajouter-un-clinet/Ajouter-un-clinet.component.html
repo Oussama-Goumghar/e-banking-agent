@@ -1,45 +1,46 @@
-<div class="card">
-  <div class="card-header card-header-warning" style="text-align: center">
-    <h3 class="card-title">Ajouter un client</h3>
-    <p class="card-category">Category subtitle</p>
-  </div>
-  <div class="card-body" >
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" >
+<form (ngSubmit)="submitForm()" [formGroup]="validateForm" nz-form>
+  <div class="card">
+    <div class="card-header card-header-warning" style="text-align: center">
+      <h3 class="card-title">Client Information</h3>
+      <p class="card-category">Formulair contient les informations du client</p>
+    </div>
+    <div class="card-body">
 
-<!--      FIRST ROW}-->
-      <div nz-row nzAlign="middle" nzJustify="center">
+      <!--      FIRST ROW}-->
+
+      <div nz-row nzJustify="center">
         <div nz-col nzSpan="8">
           <nz-form-item>
-            <nz-form-label nzRequired nzFor="firstName">First Name</nz-form-label>
+            <nz-form-label nzFor="firstName" nzRequired>First Name</nz-form-label>
             <nz-form-control nzErrorTip="enter your first name">
-              <input nz-input formControlName="firstName" id="firstName" />
+              <input formControlName="firstName" id="firstName" nz-input/>
             </nz-form-control>
           </nz-form-item>
         </div>
         <div nz-col nzSpan="8">
-          <nz-form-item class="form-outline">
-            <nz-form-label nzRequired nzFor="lastName">Last Name</nz-form-label>
+          <nz-form-item>
+            <nz-form-label nzFor="lastName" nzRequired>Last Name</nz-form-label>
             <nz-form-control nzErrorTip="enter your last name">
-              <input nz-input formControlName="lastName" id="lastName" />
+              <input formControlName="lastName" id="lastName" nz-input/>
             </nz-form-control>
           </nz-form-item>
         </div>
       </div>
       <!--      Second ROW}-->
-      <div nz-row  nzJustify="center">
+      <div nz-row nzJustify="center">
         <div nz-col nzSpan="8">
           <nz-form-item>
-            <nz-form-label  nzFor="email" nzRequired>Email</nz-form-label>
-            <nz-form-control  nzErrorTip="entrer your email">
-              <input nz-input type="email" id="email" formControlName="email" />
+            <nz-form-label nzFor="email" nzRequired>Enter Email</nz-form-label>
+            <nz-form-control nzErrorTip="entrer your email">
+              <input formControlName="email" id="email" nz-input type="email"/>
             </nz-form-control>
           </nz-form-item>
         </div>
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="checkEmail" nzRequired>Confirm Email</nz-form-label>
-            <nz-form-control  [nzErrorTip]="errorTpl">
-              <input nz-input type="email" formControlName="checkEmail" id="checkEmail"/>
+            <nz-form-control [nzErrorTip]="errorTpl">
+              <input formControlName="checkEmail" id="checkEmail" nz-input type="email"/>
               <ng-template #errorTpl let-control>
                 <ng-container *ngIf="control.hasError('required')">
                   Please confirm your email!
@@ -56,39 +57,122 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="entrer your phone number">
-          <input nz-input type="number" id="phone" formControlName="phone"/>
+          <input formControlName="phone" id="phone" nz-input type="number"/>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="address" nzRequired>Address</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="enter the address">
           <textarea
-            id="address" formControlName="address"
+            [nzAutosize]="{ minRows: 2, maxRows: 6 }" formControlName="address"
+            id="address"
             nz-input
             placeholder="enter the address"
-            [nzAutosize]="{ minRows: 2, maxRows: 6 }"
           ></textarea>
         </nz-form-control>
       </nz-form-item>
 
 
-      <div nz-row  nzAlign="middle" nzJustify="center">
-        <nz-form-item nz-col [nzGutter]="15">
-          <nz-form-control >
-            <button type="submit" mat-raised-button class="btn btn-success" (click)="submitForm()"><i class="material-icons">done</i>Register</button>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item nz-col [nzGutter]="15">
-          <nz-form-control >
-            <button type="submit" mat-raised-button class="btn btn-danger" (click)="resetForm($event)"><i class="material-icons">delete</i>Reset</button>
-
+      <div nz-row nzAlign="middle" nzJustify="center">
+        <nz-form-item [nzGutter]="15" nz-col>
+          <nz-form-control>
+            <button (click)="resetForm($event)" class="btn btn-danger" mat-raised-button type="button">
+              <i class="material-icons">delete</i>Reset
+            </button>
           </nz-form-control>
         </nz-form-item>
       </div>
 
-    </form>
 
-
+    </div>
   </div>
-</div>
+
+  <div class="card">
+    <div class="card-header card-header-icon card-header-rose">
+      <div class="card-icon">
+        <i class="material-icons"></i>
+      </div>
+      <h4 class="card-title">Compte Informations</h4>
+    </div>
+    <div class="card-body">
+      <div nz-row nzAlign="middle" nzJustify="center">
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label nzFor="devise" nzRequired>Devise</nz-form-label>
+            <nz-form-control nzErrorTip="enter your first name">
+              <input formControlName="devise" id="devise" nz-input/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label nzFor="solde" nzRequired>Solde</nz-form-label>
+            <nz-form-control nzErrorTip="enter your last name">
+              <input formControlName="solde" id="solde" nz-input type="number"/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div nz-row nzAlign="middle" nzJustify="center">
+        <nz-form-item>
+          <nz-form-label  nzFor="typeCompte" nzRequired>Gender</nz-form-label>
+          <nz-form-control  nzErrorTip="Slectionner le type du Compte!">
+            <nz-select
+              id="typeCompte"
+              formControlName="typeCompte"
+              nzPlaceHolder="Slectionner le type du Compte!"
+              nzAllowClear
+              style="width: 250px"
+            >
+              <nz-option nzValue="premium" nzLabel="Premium"></nz-option>
+              <nz-option nzValue="standard" nzLabel="Standard"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-row nzAlign="middle" nzJustify="center">
+        <button (click)="addCompte()" class="btn btn-primary" type="button">
+          <i class="material-icons">add</i>Ajouter
+        </button>
+      </div>
+      <div nz-row nzAlign="middle" nzJustify="center" style="text-align: center">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Solde</th>
+            <th>Devise</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of clientNew.compts index as i  ">
+            <td>{{data.solde}}</td>
+            <td>{{data.devise}}</td>
+            <td>{{data.typeCompte}}</td>
+            <td>
+              <button (click)="deletetCompte(i)" class="btn btn-danger" mat-raised-button><i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+  <nz-row nzAlign="middle" nzJustify="center">
+    <nz-form-item nz-col>
+      <nz-form-control>
+        <button class="btn btn-success" mat-raised-button type="submit"><i
+          class="material-icons">done</i>Register
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </nz-row>
+
+</form>
+
+
 

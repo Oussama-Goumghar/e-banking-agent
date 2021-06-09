@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {Client} from '../../Core/Models/client.model';
 import {ClientService} from '../../Core/Services/client.service';
+import {Compte} from '../../Core/Models/compte.model';
 
 @Component({
   selector: 'app-ma-relation-banque',
@@ -11,6 +12,8 @@ import {ClientService} from '../../Core/Services/client.service';
 })
 export class AjouterUnClinetComponent implements OnInit {
   validateForm!: FormGroup;
+  ComteForm!: FormGroup;
+  clientNew:Client={compts:[]}
 
 
   constructor(private fb: FormBuilder, private message: NzMessageService,private clientService:ClientService) {
@@ -24,26 +27,29 @@ export class AjouterUnClinetComponent implements OnInit {
       address: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
       checkEmail: [null, [Validators.required, this.confirmationValidator]],
+      devise: [null, [Validators.required]],
+      solde: [null, [Validators.required]],
+      typeCompte: [null, [Validators.required]],
+
     });
   }
 
   submitForm(): void {
 
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
+
     if (this.validateForm?.invalid) return
 
-    let client:Client = {
-      firstName:this.validateForm.controls.firstName.value,
-      lastName:this.validateForm.controls.lastName.value,
-      phone:this.validateForm.controls.phone.value,
-      address:this.validateForm.controls.address.value,
-      email:this.validateForm.controls.email.value
-    }
 
-    this.clientService.saveClient(client).subscribe(data=>{
+      this.clientNew.firstName=this.validateForm.controls.firstName.value,
+      this.clientNew.lastName=this.validateForm.controls.lastName.value,
+      this.clientNew.phone=this.validateForm.controls.phone.value,
+      this.clientNew.address=this.validateForm.controls.address.value,
+      this.clientNew.email=this.validateForm.controls.email.value
+
+
+    this.clientService.saveClient(this.clientNew).subscribe(data=>{
+      this.validateForm.reset();
+      this.clientNew={compts:[]}
       alert("succsess")
     })
 
@@ -70,4 +76,13 @@ export class AjouterUnClinetComponent implements OnInit {
   }
 
 
+  addCompte() {
+
+    this.clientNew.compts.push({ devise: this.validateForm.controls.devise.value,
+      solde: this.validateForm.controls.solde.value,typeCompte:this.validateForm.controls.typeCompte.value})
+  }
+
+  deletetCompte(i: number) {
+    this.clientNew.compts.splice(i,1)
+  }
 }

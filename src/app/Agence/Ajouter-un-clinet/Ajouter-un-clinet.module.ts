@@ -8,6 +8,7 @@ import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzMessageModule, NzMessageService} from 'ng-zorro-antd/message';
 import {NzLayoutModule} from 'ng-zorro-antd/layout';
+import {NzSelectModule} from 'ng-zorro-antd/select';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {NzLayoutModule} from 'ng-zorro-antd/layout';
     NzMessageModule,
     NzInputModule,
     NzLayoutModule,
+    NzSelectModule,
   ]
 })
 export class AjouterUnClinetModule { }
