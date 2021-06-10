@@ -6,6 +6,9 @@ import { NosClientsComponent } from './nos-clients.component';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {NzSpinModule} from 'ng-zorro-antd/spin';
 import {NzAlertModule} from 'ng-zorro-antd/alert';
+import {NzBadgeModule} from 'ng-zorro-antd/badge';
+import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
+import {NzDividerModule} from 'ng-zorro-antd/divider';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import {NzAlertModule} from 'ng-zorro-antd/alert';
     NosClientsRoutingModule,
     NzTableModule,
     NzSpinModule,
-    NzAlertModule
+    NzAlertModule,
+    NzBadgeModule,
+    NzDropDownModule,
+    NzDividerModule
   ]
 })
 export class NosClientsModule { }

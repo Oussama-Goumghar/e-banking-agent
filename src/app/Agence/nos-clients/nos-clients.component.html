@@ -1,12 +1,13 @@
 <ng-container *ngIf="(clients$ | async) as result" [ngSwitch]="result.dataState">
-<ng-container *ngSwitchCase="DataStateEnum.LOADING">
-  <nz-spin nzTip="Loading...">
-  </nz-spin>
-</ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+    <nz-spin nzTip="Loading...">
+    </nz-spin>
+  </ng-container>
   <ng-container *ngSwitchCase="DataStateEnum.Error">
     <div class="alert alert-danger alert-with-icon">
       <i class="material-icons" data-notify="icon">error_outline</i>
-      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">  <i class="material-icons">close</i></button>
+      <button aria-label="Close" class="close" data-dismiss="alert" mat-button type="button"><i class="material-icons">close</i>
+      </button>
       <span data-notify="message">
         <b>Error</b>{{result.errorMessage}}</span>
     </div>
@@ -15,29 +16,32 @@
     <nz-table #nestedTable [nzData]="result.data" [nzPageSize]="10">
       <thead>
       <tr>
-        <th>FirstName</th>
-        <th>LastName</th>
-        <th>Email</th>
-        <th>Phone</th>
+        <th></th>
+        <th>Nom Complet</th>
+        <th>email</th>
+        <th>telephone</th>
+        <th>status</th>
         <th>Action</th>
       </tr>
       </thead>
       <tbody>
-      <ng-template ngFor let-data [ngForOf]="nestedTable.data">
+      <ng-template [ngForOf]="nestedTable.data" let-data ngFor>
         <tr>
-          <td>{{ data.lastName }}</td>
-          <td>{{ data.fistName }}</td>
+          <td [(nzExpand)]="data.expand"></td>
+          <td>{{ data.firstName }} {{ data.lastName }}</td>
           <td>{{ data.email }}</td>
-          <td>{{ data. phone}}</td>
+          <td>{{ data }}</td>
+          <td>{{ data.isActive }}</td>
           <td>
-            <a (click)="displayAlert()">Approve</a>
+            <a>Publish</a>
           </td>
+        </tr>
+        <tr [nzExpand]="data.expand">
+           <div>heloooooooooooooooo</div>
         </tr>
       </ng-template>
       </tbody>
     </nz-table>
-
-
   </ng-container>
 
 </ng-container>

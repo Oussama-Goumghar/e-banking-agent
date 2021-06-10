@@ -22,7 +22,6 @@ export class NosClientsComponent implements OnInit {
 
 
   OnGetAllClients(){
-
     this.clients$=this.clientService.getAllClients().pipe(
       map(data=>{
         return ({dataState:DataStateEnum.LOADED,data:data})}),
@@ -33,6 +32,7 @@ export class NosClientsComponent implements OnInit {
 
   displayAlert() {
     alert("Prof approved")
+
   }
 
 }

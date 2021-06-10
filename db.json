@@ -19,6 +19,43 @@
       "address": "dssdsd",
       "email": "g.oussamaww2@gmail.com",
       "id": 1
+    },
+    {
+      "compts": [
+        {
+          "devise": "jjjkkj",
+          "solde": 0,
+          "typeCompte": "standard"
+        }
+      ],
+      "firstName": "oussama",
+      "lastName": "goumghar",
+      "phone": 3409439,
+      "address": "m,d,mc,mc,ccx,,cx",
+      "email": "gogog@gmail.com",
+      "isActive": true,
+      "id": 2
+    },
+    {
+      "compts": [
+        {
+          "devise": "jjjkkj",
+          "solde": 88,
+          "typeCompte": "standard"
+        },
+        {
+          "devise": "jjjkkj",
+          "solde": 988,
+          "typeCompte": "standard"
+        }
+      ],
+      "firstName": "oussama",
+      "lastName": "goumghar",
+      "phone": 0,
+      "address": "l,",
+      "email": "gogog@gmail.com",
+      "isActive": true,
+      "id": 3
     }
   ]
 }

@@ -9,4 +9,5 @@ export interface Client {
   address?: string
   isActive?:boolean
   compts?: Compte[]
+  expand?:boolean
 }
