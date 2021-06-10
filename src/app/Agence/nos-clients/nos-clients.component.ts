@@ -35,4 +35,25 @@ export class NosClientsComponent implements OnInit {
 
   }
 
+
+  disableClient(client:Client) {
+    this.clientService.desactivateClient(client).subscribe(data=>{
+      client.isActive=data.isActive
+    })
+  }
+
+  deleteClient(client:Client){
+    this.clientService.deleteClient(client).subscribe(data=>{
+      this.OnGetAllClients()
+    })
+  }
+
+  expandSet = new Set<number>();
+  onExpandChange(id: number, checked: boolean): void {
+    if (checked) {
+      this.expandSet.add(id);
+    } else {
+      this.expandSet.delete(id);
+    }
+  }
 }

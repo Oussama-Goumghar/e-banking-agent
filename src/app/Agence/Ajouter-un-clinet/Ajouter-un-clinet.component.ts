@@ -41,18 +41,15 @@ export class AjouterUnClinetComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-
     if (this.validateForm?.invalid) {
       return
     }
-
-
     this.clientNew.firstName = this.validateForm.controls.firstName.value
-      this.clientNew.lastName = this.validateForm.controls.lastName.value
-      this.clientNew.phone = this.validateForm.controls.phone.value
-      this.clientNew.address = this.validateForm.controls.address.value
-      this.clientNew.email = this.validateForm.controls.email.value
-    this.clientNew.isActive=true
+    this.clientNew.lastName = this.validateForm.controls.lastName.value
+    this.clientNew.phone = this.validateForm.controls.phone.value
+    this.clientNew.address = this.validateForm.controls.address.value
+    this.clientNew.email = this.validateForm.controls.email.value
+    this.clientNew.isActive = true
 
 
     this.clientService.saveClient(this.clientNew).subscribe(data => {

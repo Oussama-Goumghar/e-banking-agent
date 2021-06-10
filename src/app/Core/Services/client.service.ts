@@ -22,9 +22,15 @@ export class ClientService {
     return this.http.get<Client[]>(host+"clients")
   }
 
-  deleteClient(client:Client){
+  desactivateClient(client:Client):Observable<Client>{
     let host=environment.host
-    return this.http.delete(host+"clients/"+client.id)
+    client.isActive=!client.isActive
+    return this.http.put<Client>(host+"clients/"+client.id,client)
+  }
+
+  deleteClient(client:Client):Observable<void>{
+    let host=environment.host
+    return this.http.delete<void>(host+"clients/"+client.id)
   }
 
 

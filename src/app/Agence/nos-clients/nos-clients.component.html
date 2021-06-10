@@ -14,32 +14,59 @@
   </ng-container>
   <ng-container *ngSwitchCase="DataStateEnum.LOADED">
     <nz-table #nestedTable [nzData]="result.data" [nzPageSize]="10">
-      <thead>
+      <thead >
       <tr>
-        <th></th>
-        <th>Nom Complet</th>
-        <th>email</th>
-        <th>telephone</th>
-        <th>status</th>
-        <th>Action</th>
+        <th class="bg-info" style="color: white"></th>
+        <th class="bg-info" style="color: white">Nom Complet</th>
+        <th class="bg-info" style="color: white">Email</th>
+        <th class="bg-info" style="color: white">Telephone</th>
+        <th class="bg-info" style="color: white">Address</th>
+        <th class="bg-info" style="color: white">Status</th>
+        <th class="bg-info" style="color: white">Action</th>
       </tr>
       </thead>
       <tbody>
-      <ng-template [ngForOf]="nestedTable.data" let-data ngFor>
+      <ng-container *ngFor="let data of nestedTable.data">
         <tr>
-          <td [(nzExpand)]="data.expand"></td>
+          <td (nzExpandChange)="onExpandChange(data.id, $event)" [nzExpand]="expandSet.has(data.id)"></td>
           <td>{{ data.firstName }} {{ data.lastName }}</td>
           <td>{{ data.email }}</td>
-          <td>{{ data }}</td>
+          <td>{{ data.phone}}</td>
+          <td>{{ data.address}}</td>
           <td>{{ data.isActive }}</td>
           <td>
-            <a>Publish</a>
+            <div nz-row nzJustify="space-between" >
+            <ng-template [ngIf]="data.isActive==true">
+              <a><i class="material-icons" style="color: green" (click)="disableClient(data)">toggle_on</i></a>
+            </ng-template>
+            <ng-template [ngIf]="data.isActive==false">
+              <a><i class="material-icons" style="color: red" (click)="disableClient(data)">toggle_off</i></a>
+            </ng-template>
+            <a><i class="material-icons" style="color: orange" (click)="deleteClient(data)">delete</i></a>
+            <a><i class="material-icons" style="color: #2CA8FF" (click)="displayAlert()">mode_edit</i></a>
+            </div>
           </td>
         </tr>
-        <tr [nzExpand]="data.expand">
-           <div>heloooooooooooooooo</div>
+        <tr [nzExpand]="expandSet.has(data.id)">
+          <nz-table #innerTable [nzData]="data.compts" nzSize="middle" [nzShowPagination]="false">
+             <thead>
+    <tr>
+
+      <th style="background-color: orange;color: white">Solde</th>
+      <th style="background-color:orange;color: white">Devise</th>
+      <th style="background-color: orange;color: white">Type</th>
+    </tr>
+    </thead>
+      <tbody>
+      <tr *ngFor="let cmp of innerTable.data" >
+        <td>{{ cmp.solde }}</td>
+        <td>{{ cmp.devise }}</td>
+        <td>{{ cmp.typeCompte }}</td>
+      </tr>
+      </tbody>
+          </nz-table>
         </tr>
-      </ng-template>
+       </ng-container>
       </tbody>
     </nz-table>
   </ng-container>

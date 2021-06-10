@@ -3,26 +3,6 @@
     {
       "compts": [
         {
-          "devise": "vfb",
-          "solde": 4545,
-          "typeCompte": "standard"
-        },
-        {
-          "devise": "vfb",
-          "solde": 4545,
-          "typeCompte": "standard"
-        }
-      ],
-      "firstName": "oussama",
-      "lastName": "goumghar",
-      "phone": 343443,
-      "address": "dssdsd",
-      "email": "g.oussamaww2@gmail.com",
-      "id": 1
-    },
-    {
-      "compts": [
-        {
           "devise": "jjjkkj",
           "solde": 0,
           "typeCompte": "standard"
@@ -33,7 +13,7 @@
       "phone": 3409439,
       "address": "m,d,mc,mc,ccx,,cx",
       "email": "gogog@gmail.com",
-      "isActive": true,
+      "isActive": false,
       "id": 2
     },
     {
