@@ -33,5 +33,10 @@ export class ClientService {
     return this.http.delete<void>(host+"clients/"+client.id)
   }
 
+  updateClient(client: Client): Observable<Client> {
+    let host=environment.host
+    return this.http.put<Client>(host+"clients/"+client.id,client)
+  }
+
 
 }

@@ -43,7 +43,7 @@
               <a><i class="material-icons" style="color: red" (click)="disableClient(data)">toggle_off</i></a>
             </ng-template>
             <a><i class="material-icons" style="color: orange" (click)="deleteClient(data)">delete</i></a>
-            <a><i class="material-icons" style="color: #2CA8FF" (click)="displayAlert()">mode_edit</i></a>
+            <a><i class="material-icons" style="color: #2CA8FF" (click)="createTplModal(tplContent, tplFooter,data)">mode_edit</i></a>
             </div>
           </td>
         </tr>
@@ -72,3 +72,44 @@
   </ng-container>
 
 </ng-container>
+<ng-template #tplContent let-params let-ref="modalRef">
+  <form  #f ="ngForm"  [formGroup]="CompteForm" class="login-form" (ngSubmit)="updateClient()" >
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your fristname!">
+        <input type="text" nz-input formControlName="firstName" placeholder="firstname" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your lastName!">
+        <input type="text" nz-input formControlName="lastName" placeholder="lastName" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your tele!">
+        <input type="number" nz-input formControlName="phone" placeholder="phone" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your email!">
+        <input type="email" nz-input formControlName="email" placeholder="email" />
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your numero de address!">
+        <input type="text" nz-input formControlName="address" placeholder="address" />
+      </nz-form-control>
+    </nz-form-item>
+    <button type="submit" style="width: 100%;" class="btn btn-primary"  (click)="ref.destroy()">Modifier</button>
+    <button (click)="ref.destroy()" type="submit" style="width: 100%;" class="btn btn-danger" >Close</button>
+
+  </form>
+</ng-template>
+<ng-template #tplFooter let-ref="modalRef">
+
+</ng-template>

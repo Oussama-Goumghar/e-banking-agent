@@ -10,20 +10,28 @@ import {NzBadgeModule} from 'ng-zorro-antd/badge';
 import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 import {NzDividerModule} from 'ng-zorro-antd/divider';
 import {NzGridModule} from 'ng-zorro-antd/grid';
+import {NzFormModule} from 'ng-zorro-antd/form';
+import {NzInputModule} from 'ng-zorro-antd/input';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NzModalModule, NzModalService} from 'ng-zorro-antd/modal';
 
 
 @NgModule({
   declarations: [NosClientsComponent],
-    imports: [
-        CommonModule,
-        NosClientsRoutingModule,
-        NzTableModule,
-        NzSpinModule,
-        NzAlertModule,
-        NzBadgeModule,
-        NzDropDownModule,
-        NzDividerModule,
-        NzGridModule
-    ]
+  imports: [
+    CommonModule,
+    NosClientsRoutingModule,
+    NzTableModule,
+    NzSpinModule,
+    NzAlertModule,
+    NzBadgeModule,
+    NzDropDownModule,
+    NzDividerModule,
+    NzGridModule,
+    NzFormModule,
+    NzInputModule,
+    ReactiveFormsModule,
+    NzModalModule
+  ]
 })
 export class NosClientsModule { }
