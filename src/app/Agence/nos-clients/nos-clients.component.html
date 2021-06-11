@@ -55,6 +55,9 @@
       <th style="background-color: orange;color: white">Solde</th>
       <th style="background-color:orange;color: white">Devise</th>
       <th style="background-color: orange;color: white">Type</th>
+      <th style="background-color: orange;color: white">
+        <a><i class="material-icons" style="color: white"  (click)="createCompteModal(CompteContent,CompteFooter,data)">person_add_alt</i></a>
+      </th>
     </tr>
     </thead>
       <tbody>
@@ -73,7 +76,7 @@
 
 </ng-container>
 <ng-template #tplContent let-params let-ref="modalRef">
-  <form  #f ="ngForm"  [formGroup]="CompteForm" class="login-form" (ngSubmit)="updateClient()" >
+  <form  #f ="ngForm"  [formGroup]="ClientForm" class="login-form" (ngSubmit)="updateClient()" >
 
     <nz-form-item>
       <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your fristname!">
@@ -111,5 +114,44 @@
   </form>
 </ng-template>
 <ng-template #tplFooter let-ref="modalRef">
+
+</ng-template>
+
+
+<ng-template #CompteContent let-params let-ref="modalRef">
+  <form  #f ="ngForm"  [formGroup]="CompteForm" class="login-form"  >
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your Devise!">
+        <input type="text" nz-input formControlName="devise" placeholder="devise" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your solde!">
+        <input type="text" nz-input formControlName="solde" placeholder="solde" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24" nzErrorTip="Slectionner le type du Compte!">
+        <nz-select
+          id="typeCompte"
+          formControlName="typeCompte"
+          nzPlaceHolder="Slectionner le type du Compte!"
+          nzAllowClear
+        >
+          <nz-option nzValue="premium" nzLabel="Premium"></nz-option>
+          <nz-option nzValue="standard" nzLabel="Standard"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button type="submit" style="width: 100%;" class="btn btn-primary"  (click)="ref.destroy()">Ajouter</button>
+    <button (click)="ref.destroy()" type="submit" style="width: 100%;" class="btn btn-danger" >Close</button>
+
+  </form>
+</ng-template>
+<ng-template #CompteFooter let-ref="modalRef">
 
 </ng-template>

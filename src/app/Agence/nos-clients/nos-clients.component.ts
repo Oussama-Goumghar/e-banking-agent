@@ -16,6 +16,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class NosClientsComponent implements OnInit {
   clients$: Observable<AppDataState<Client[]>> | null=null;
   DataStateEnum=DataStateEnum
+  ClientForm!: FormGroup;
   CompteForm!: FormGroup;
   clientUpdate: Client = {compts: []}
 
@@ -55,11 +56,11 @@ export class NosClientsComponent implements OnInit {
   }
 
   updateClient(){
-    this.clientUpdate.firstName=this.CompteForm.controls.firstName.value
-    this.clientUpdate.lastName=this.CompteForm.controls.lastName.value
-    this.clientUpdate.phone=this.CompteForm.controls.phone.value
-    this.clientUpdate.address=this.CompteForm.controls.address.value
-    this.clientUpdate.email=this.CompteForm.controls.email.value
+    this.clientUpdate.firstName=this.ClientForm.controls.firstName.value
+    this.clientUpdate.lastName=this.ClientForm.controls.lastName.value
+    this.clientUpdate.phone=this.ClientForm.controls.phone.value
+    this.clientUpdate.address=this.ClientForm.controls.address.value
+    this.clientUpdate.email=this.ClientForm.controls.email.value
     this.clientService.updateClient(this.clientUpdate).subscribe(data=>{
       this.clientUpdate=data
     })
@@ -79,7 +80,7 @@ export class NosClientsComponent implements OnInit {
   createTplModal( tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>,client:Client): void {
     console.log(client)
     this.clientUpdate=client
-    this.CompteForm=this.fb.group({
+    this.ClientForm=this.fb.group({
       firstName: [this.clientUpdate.firstName, [Validators.required]],
       lastName: [this.clientUpdate.lastName, [Validators.required]],
       phone: [this.clientUpdate.phone, [Validators.required]],
@@ -102,5 +103,27 @@ export class NosClientsComponent implements OnInit {
     });
   }
 
+  createCompteModal( CompteContent: TemplateRef<{}>, CompteFooter: TemplateRef<{}>,client:Client): void {
+    console.log(client)
 
+    this.CompteForm=this.fb.group({
+      devise: [null, [Validators.required]],
+      solde: [null, [Validators.required]],
+      typeCompte: [null, [Validators.required]],
+    })
+
+    this.modal.create({
+
+      nzContent: CompteContent,
+      nzFooter: CompteFooter,
+      nzMaskClosable: false,
+      nzWidth:500,
+
+      nzClosable: false,
+      nzComponentParams: {
+        value: 'Template Context'
+      },
+      nzOnOk: () => console.log('Click ok')
+    });
+  }
 }
