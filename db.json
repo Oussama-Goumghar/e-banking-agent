@@ -6,13 +6,23 @@
           "devise": "jjjkkj",
           "solde": 0,
           "typeCompte": "standard"
+        },
+        {
+          "solde": "334",
+          "typeCompte": "premium",
+          "devise": "34343"
+        },
+        {
+          "solde": "2323",
+          "typeCompte": "standard",
+          "devise": "4344"
         }
       ],
       "firstName": "brahim",
       "lastName": "affais",
       "phone": 698787797,
-      "address": "m,d,mc,mc,ccx,,cx",
-      "email": "gogog@gmail.com",
+      "address": "marrakech ",
+      "email": "gogog@gmail.como",
       "isActive": true,
       "id": 2
     },

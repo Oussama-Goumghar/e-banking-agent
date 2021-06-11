@@ -6,6 +6,7 @@ import {AppDataState, DataStateEnum} from '../../../state/client.state';
 import {catchError, map, startWith} from 'rxjs/operators';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Compte} from '../../Core/Models/compte.model';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class NosClientsComponent implements OnInit {
   ClientForm!: FormGroup;
   CompteForm!: FormGroup;
   clientUpdate: Client = {compts: []}
+  compteAdd:Compte={}
 
   constructor(private clientService:ClientService,private modal: NzModalService,private fb: FormBuilder) { }
 
@@ -64,8 +66,20 @@ export class NosClientsComponent implements OnInit {
     this.clientService.updateClient(this.clientUpdate).subscribe(data=>{
       this.clientUpdate=data
     })
+  }
+  AddCompte(){
+    for (const i in this.CompteForm.controls) {
+      this.CompteForm.controls[i].markAsDirty();
+      this.CompteForm.controls[i].updateValueAndValidity();
+    }
+   this.compteAdd.solde=this.CompteForm.controls.solde.value
+   this.compteAdd.typeCompte=this.CompteForm.controls.typeCompte.value
+   this.compteAdd.devise=this.CompteForm.controls.devise.value
 
-
+    this.clientUpdate.compts.push(this.compteAdd)
+    this.clientService.updateClient(this.clientUpdate).subscribe(data=>{
+      this.OnGetAllClients()
+    })
   }
 
   expandSet = new Set<number>();
@@ -78,7 +92,7 @@ export class NosClientsComponent implements OnInit {
   }
 
   createTplModal( tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>,client:Client): void {
-    console.log(client)
+
     this.clientUpdate=client
     this.ClientForm=this.fb.group({
       firstName: [this.clientUpdate.firstName, [Validators.required]],
@@ -104,7 +118,7 @@ export class NosClientsComponent implements OnInit {
   }
 
   createCompteModal( CompteContent: TemplateRef<{}>, CompteFooter: TemplateRef<{}>,client:Client): void {
-    console.log(client)
+    this.clientUpdate=client
 
     this.CompteForm=this.fb.group({
       devise: [null, [Validators.required]],

@@ -119,7 +119,7 @@
 
 
 <ng-template #CompteContent let-params let-ref="modalRef">
-  <form  #f ="ngForm"  [formGroup]="CompteForm" class="login-form"  >
+  <form  #f ="ngForm"  [formGroup]="CompteForm" class="login-form" (ngSubmit)="AddCompte()" >
 
     <nz-form-item>
       <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your Devise!">
