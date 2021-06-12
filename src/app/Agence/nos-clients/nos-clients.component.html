@@ -14,12 +14,16 @@
   </ng-container>
   <ng-container *ngSwitchCase="DataStateEnum.LOADED">
     <nz-table #nestedTable [nzData]="result.data" [nzPageSize]="10">
-      <thead >
+      <thead>
       <tr>
         <th class="bg-info" style="color: white"></th>
-        <th class="bg-info" style="color: white">Nom Complet</th>
+        <th class="bg-info" style="color: white">Nom Complet
+          <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+        </th>
         <th class="bg-info" style="color: white">Email</th>
-        <th class="bg-info" style="color: white">Telephone</th>
+        <th class="bg-info" style="color: white">CIN</th>
         <th class="bg-info" style="color: white">Address</th>
         <th class="bg-info" style="color: white">Status</th>
         <th class="bg-info" style="color: white">Action</th>
@@ -29,87 +33,90 @@
       <ng-container *ngFor="let data of nestedTable.data">
         <tr>
           <td (nzExpandChange)="onExpandChange(data.id, $event)" [nzExpand]="expandSet.has(data.id)"></td>
-          <td>{{ data.firstName }} {{ data.lastName }}</td>
+          <td>{{ data.firstname }} {{ data.lastname }}</td>
           <td>{{ data.email }}</td>
-          <td>{{ data.phone}}</td>
-          <td>{{ data.address}}</td>
-          <td>{{ data.isActive }}</td>
+          <td>{{ data.cin}}</td>
+          <td>{{ data.adress}}</td>
+          <td>{{ data.active }}</td>
           <td>
-            <div nz-row nzJustify="space-between" >
-            <ng-template [ngIf]="data.isActive==true">
-              <a><i class="material-icons" style="color: green" (click)="disableClient(data)">toggle_on</i></a>
-            </ng-template>
-            <ng-template [ngIf]="data.isActive==false">
-              <a><i class="material-icons" style="color: red" (click)="disableClient(data)">toggle_off</i></a>
-            </ng-template>
-            <a><i class="material-icons" style="color: orange" (click)="deleteClient(data)">delete</i></a>
-            <a><i class="material-icons" style="color: #2CA8FF" (click)="createTplModal(tplContent, tplFooter,data)">mode_edit</i></a>
+            <div nz-row nzJustify="space-between">
+              <ng-template [ngIf]="data.active==true">
+                <a><i (click)="disableClient(data)" class="material-icons" style="color: green">toggle_on</i></a>
+              </ng-template>
+              <ng-template [ngIf]="data.active==false">
+                <a><i (click)="disableClient(data)" class="material-icons" style="color: red">toggle_off</i></a>
+              </ng-template>
+              <a><i (click)="deleteClient(data)" class="material-icons" style="color: orange">delete</i></a>
+              <a><i (click)="createTplModal(tplContent, tplFooter,data)" class="material-icons" style="color: #2CA8FF">mode_edit</i></a>
+              <a><i [routerLink]="['/Agence/make-transaction/',data.id]"  class="material-icons" style="color: greenyellow">attach_money</i></a>
             </div>
           </td>
         </tr>
         <tr [nzExpand]="expandSet.has(data.id)">
-          <nz-table #innerTable [nzData]="data.compts" nzSize="middle" [nzShowPagination]="false">
-             <thead>
-    <tr>
+          <nz-table #innerTable [nzData]="data.accounts" [nzShowPagination]="false" nzSize="middle">
+      <thead>
+      <tr>
 
-      <th style="background-color: orange;color: white">Solde</th>
-      <th style="background-color:orange;color: white">Devise</th>
-      <th style="background-color: orange;color: white">Type</th>
-      <th style="background-color: orange;color: white">
-        <a><i class="material-icons" style="color: white"  (click)="createCompteModal(CompteContent,CompteFooter,data)">person_add_alt</i></a>
-      </th>
-    </tr>
-    </thead>
+        <th style="background-color: orange;color: white">Solde</th>
+        <th style="background-color:orange;color: white">Devise</th>
+        <th style="background-color: orange;color: white">Type</th>
+        <th style="background-color: orange;color: white">
+          <a><i (click)="createCompteModal(CompteContent,CompteFooter,data)" class="material-icons"
+                style="color: white">person_add_alt</i></a>
+        </th>
+      </tr>
+      </thead>
       <tbody>
-      <tr *ngFor="let cmp of innerTable.data" >
-        <td>{{ cmp.solde }}</td>
-        <td>{{ cmp.devise }}</td>
-        <td>{{ cmp.typeCompte }}</td>
+      <tr *ngFor="let cmp of innerTable.data">
+        <td>{{ cmp.balance }}</td>
+        <td>{{ cmp.currency }}</td>
+        <td>{{ cmp.type }}</td>
+        <td><a><i (click)="deleteCompte(cmp)" class="material-icons" style="color: red">delete</i></a></td>
       </tr>
       </tbody>
-          </nz-table>
-        </tr>
-       </ng-container>
-      </tbody>
     </nz-table>
+    </tr>
   </ng-container>
+  </tbody>
+  </nz-table>
+</ng-container>
 
 </ng-container>
 <ng-template #tplContent let-params let-ref="modalRef">
-  <form  #f ="ngForm"  [formGroup]="ClientForm" class="login-form" (ngSubmit)="updateClient()" >
+  <form #f="ngForm" (ngSubmit)="updateClient()" [formGroup]="ClientForm" class="login-form">
 
     <nz-form-item>
-      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your fristname!">
-        <input type="text" nz-input formControlName="firstName" placeholder="firstname" />
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your fristname!">
+        <input formControlName="firstName" nz-input placeholder="firstname" type="text"/>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your lastName!">
-        <input type="text" nz-input formControlName="lastName" placeholder="lastName" />
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your lastName!">
+        <input formControlName="lastName" nz-input placeholder="lastName" type="text"/>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your tele!">
-        <input type="number" nz-input formControlName="phone" placeholder="phone" />
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your tele!">
+        <input formControlName="cin" nz-input placeholder="cin" type="text"/>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your email!">
-        <input type="email" nz-input formControlName="email" placeholder="email" />
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your email!">
+        <input formControlName="email" nz-input placeholder="email" type="email"/>
       </nz-form-control>
     </nz-form-item>
 
 
     <nz-form-item>
       <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your numero de address!">
-        <input type="text" nz-input formControlName="address" placeholder="address" />
+        <input formControlName="address" nz-input placeholder="address" type="text"/>
       </nz-form-control>
     </nz-form-item>
-    <button type="submit" style="width: 100%;" class="btn btn-primary"  (click)="ref.destroy()">Modifier</button>
-    <button (click)="ref.destroy()" type="submit" style="width: 100%;" class="btn btn-danger" >Close</button>
+    <button (click)="ref.destroy()" class="btn btn-primary" style="width: 100%;" type="submit">Modifier</button>
+    <button (click)="ref.destroy()" class="btn btn-danger" style="width: 100%;" type="submit">Close</button>
 
   </form>
 </ng-template>
@@ -119,39 +126,51 @@
 
 
 <ng-template #CompteContent let-params let-ref="modalRef">
-  <form  #f ="ngForm"  [formGroup]="CompteForm" class="login-form" (ngSubmit)="AddCompte()" >
+  <form #f="ngForm" (ngSubmit)="AddCompte()" [formGroup]="CompteForm" class="login-form">
 
     <nz-form-item>
-      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your Devise!">
-        <input type="text" nz-input formControlName="devise" placeholder="devise" />
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your Devise!">
+        <input formControlName="devise" nz-input placeholder="devise" type="text"/>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your solde!">
-        <input type="text" nz-input formControlName="solde" placeholder="solde" />
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your solde!">
+        <input formControlName="solde" nz-input placeholder="solde" type="number"/>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
       <nz-form-control [nzSpan]="24" nzErrorTip="Slectionner le type du Compte!">
         <nz-select
-          id="typeCompte"
           formControlName="typeCompte"
-          nzPlaceHolder="Slectionner le type du Compte!"
+          id="typeCompte"
           nzAllowClear
+          nzPlaceHolder="Slectionner le type du Compte!"
         >
-          <nz-option nzValue="premium" nzLabel="Premium"></nz-option>
-          <nz-option nzValue="standard" nzLabel="Standard"></nz-option>
+          <nz-option nzLabel="Premium" nzValue="premium"></nz-option>
+          <nz-option nzLabel="Standard" nzValue="standard"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
 
-    <button type="submit" style="width: 100%;" class="btn btn-primary"  (click)="ref.destroy()">Ajouter</button>
-    <button (click)="ref.destroy()" type="submit" style="width: 100%;" class="btn btn-danger" >Close</button>
+    <button (click)="ref.destroy()" class="btn btn-primary" style="width: 100%;" type="submit">Ajouter</button>
+    <button (click)="ref.destroy()" class="btn btn-danger" style="width: 100%;" type="submit">Close</button>
 
   </form>
 </ng-template>
 <ng-template #CompteFooter let-ref="modalRef">
 
 </ng-template>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input [(ngModel)]="searchValue" nz-input placeholder="Search name" type="text"/>
+      <button (click)="search()" class="search-button" nz-button nzSize="small" nzType="primary">
+        Search
+      </button>
+      <button (click)="reset()" nz-button nzSize="small">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

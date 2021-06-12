@@ -61,6 +61,12 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="cin" nzRequired>CIN</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="entrer your CIN">
+          <input formControlName="cin" id="cin" nz-input type="text"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="address" nzRequired>Address</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="enter the address">
           <textarea
@@ -98,9 +104,19 @@
       <div nz-row nzAlign="middle" nzJustify="center">
         <div nz-col nzSpan="8">
           <nz-form-item>
-            <nz-form-label nzFor="devise" nzRequired>Devise</nz-form-label>
-            <nz-form-control nzErrorTip="enter your first name">
-              <input formControlName="devise" id="devise" nz-input/>
+            <nz-form-label  nzFor="devise" nzRequired>Devise</nz-form-label>
+            <nz-form-control  nzErrorTip="Slectionner le devise du Compte!">
+              <nz-select
+                id="devise"
+                formControlName="devise"
+                nzPlaceHolder="Slectionner le devise du Compte!"
+                nzAllowClear
+                style="width: 250px"
+              >
+                <nz-option nzValue="Dirham" nzLabel="Dirham"></nz-option>
+                <nz-option nzValue="Euro" nzLabel="Euro"></nz-option>
+                <nz-option nzValue="Dollar" nzLabel="Dollar"></nz-option>
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -146,10 +162,10 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let data of clientNew.compts index as i  ">
-            <td>{{data.solde}}</td>
-            <td>{{data.devise}}</td>
-            <td>{{data.typeCompte}}</td>
+          <tr *ngFor="let data of clientNew.accounts index as i  ">
+            <td>{{data.balance}}</td>
+            <td>{{data.currency}}</td>
+            <td>{{data.type}}</td>
             <td>
               <button (click)="deletetCompte(i)" class="btn btn-danger" mat-raised-button><i class="material-icons">delete</i>
               </button>

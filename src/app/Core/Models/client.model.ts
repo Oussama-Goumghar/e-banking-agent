@@ -1,13 +1,18 @@
 import {Compte} from './compte.model';
+import {Benificiaire} from './benifisiaire.model';
 
 export interface Client {
   id?: number
-  lastName?: string
-  firstName?: string
+  lastname?: string
+  firstname?: string
   email?: string
-  phone?: string
-  address?: string
-  isActive?:boolean
-  compts?: Compte[]
-  expand?:boolean
+  username?: string
+  tele?: string
+  adress?: string
+  cin?: string
+  password?: string
+  active?:boolean
+  accounts?: Compte[]
+  benificiers?: Benificiaire[]
+
 }

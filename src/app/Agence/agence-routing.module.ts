@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { AgenceComponent } from './agence.component';
+import {AgenceComponent} from './agence.component';
 
 // @ts-ignore
 // @ts-ignore
@@ -13,16 +13,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./accueil/accueil.module').then(m => m.AccueilModule) ,
+        loadChildren: () => import('./accueil/accueil.module').then(m => m.AccueilModule),
       },
       {
-       path: 'Accueil',
-        loadChildren: () => import('./accueil/accueil.module').then(m => m.AccueilModule) ,
+        path: 'Accueil',
+        loadChildren: () => import('./accueil/accueil.module').then(m => m.AccueilModule),
       },
 
       {
         path: 'ajouter-un-clinet',
-        loadChildren: () => import('./Ajouter-un-clinet/Ajouter-un-clinet.module').then(m => m.AjouterUnClinetModule) ,
+        loadChildren: () => import('./Ajouter-un-clinet/Ajouter-un-clinet.module').then(m => m.AjouterUnClinetModule),
       },
 
 
@@ -33,9 +33,10 @@ const routes: Routes = [
 
       {
         path: 'nos-clients',
-        loadChildren: () => import('./nos-clients/nos-clients.module').then(m => m.NosClientsModule)      },
+        loadChildren: () => import('./nos-clients/nos-clients.module').then(m => m.NosClientsModule)
+      },
 
-
+      { path: 'make-transaction/:id', loadChildren: () => import('./make-transaction/make-transaction.module').then(m => m.MakeTransactionModule) },
     ]
   },
 
@@ -45,4 +46,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AgenceRoutingModule { }
+export class AgenceRoutingModule {
+}

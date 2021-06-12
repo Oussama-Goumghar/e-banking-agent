@@ -1,0 +1,132 @@
+<div class="row" *ngIf="(clientNow$ | async) as result">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Effectuer Un Virement </h4>
+      </div>
+      <div class="card-body">
+
+        <form  #f ="ngForm"  [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm(f.value)">
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+
+              <nz-form-item >
+                <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="Compte" nzRequired>compte à débiter</nz-form-label>
+                <nz-form-control [nzSpan]=""  nzErrorTip="Please select your Compte!">
+                  <nz-select
+                    id="Compte" formControlName="Comptes" nzPlaceHolder="Select Compte"
+                    nzAllowClear>
+                    <nz-option *ngFor="let compte of result.data.accounts" [nzLabel]="compte.client.lastname" [nzValue]="compte"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+
+              <nz-form-item >
+                <nz-form-label [nzSm]="6" [nzXs]="12" [nzSpan]="" nzFor="Compte" nzRequired>compte de Beneficiaire </nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please select your Compte!">
+                  <nz-select
+                    id="bninfceir" formControlName="Beneficiaire" nzPlaceHolder="Select Beneficiaire"
+                    nzAllowClear>
+
+
+                    <nz-option *ngFor="let benf of result.data.benificiers" [nzLabel]="benf.lastName" [nzValue]="benf"></nz-option>
+
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+          </div>
+
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+
+              <nz-form-item >
+                <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="montant" nzRequired>montant</nz-form-label>
+                <nz-form-control [nzSpan]=""  nzErrorTip="Please inpute  your montant!">
+                  <input type="text" nz-input formControlName="montant" placeholder="montant" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row >
+            <div nz-col nzSpan="24" class="Qrow">
+
+              <nz-form-item >
+                <nz-form-label [nzSm]="5" [nzXs]="12" [nzSpan]="" nzFor="montant" nzRequired>motif</nz-form-label>
+                <nz-form-control [nzSpan]=""  nzErrorTip="Please inpute  your motif!">
+                  <input type="text" nz-input formControlName="motif" placeholder="motif" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row >
+            <div nz-col nzSpan="7" class="Qrow">
+              <p style="color: #ED362C">* indique un champ obligatoir</p>
+
+            </div>
+            <div nz-col nzSpan="17" class="Qrow">
+
+              <button style="width: 100%;" class="btn btn-success" type="submit" >Valide</button>
+
+
+            </div>
+          </div>
+        </form>
+
+
+
+
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<ng-template #tplContent let-params let-ref="modalRef">
+  <form  #f ="ngForm"  [formGroup]="validateFormben" class="login-form" (ngSubmit)="addnewB(f.value)">
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your fristname!">
+        <input type="text" nz-input formControlName="firstname" placeholder="firstname" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your lastName!">
+        <input type="text" nz-input formControlName="lastName" placeholder="lastName" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your tele!">
+        <input type="text" nz-input formControlName="tele" placeholder="tele" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control   [nzSpan]="24" nzErrorTip="Please enter your email!">
+        <input type="email" nz-input formControlName="email" placeholder="email" />
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please enter your numero de compte!">
+        <input type="text" nz-input formControlName="accountNum" placeholder="numero de compte" />
+      </nz-form-control>
+    </nz-form-item>
+    <button type="submit" style="width: 100%;" class="btn btn-primary"  (click)="ref.destroy()">Ajouter</button>
+    <button (click)="ref.destroy()" type="submit" style="width: 100%;" class="btn btn-danger" >Close</button>
+
+  </form>
+</ng-template>
+<ng-template #tplFooter let-ref="modalRef">
+
+</ng-template>

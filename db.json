@@ -5,23 +5,52 @@
         {
           "devise": "jjjkkj",
           "solde": 0,
-          "typeCompte": "standard"
+          "typeCompte": "standard",
+          "compteNumber": 222434
         },
         {
           "solde": "334",
           "typeCompte": "premium",
-          "devise": "34343"
+          "devise": "34343",
+          "compteNumber": 222434
         },
         {
           "solde": "2323",
           "typeCompte": "standard",
-          "devise": "4344"
+          "devise": "4344",
+          "compteNumber": 222434
+        },
+        {
+          "solde": "fdkfdk",
+          "typeCompte": "standard",
+          "devise": "ddkjds",
+          "compteNumber": 222434
+        }
+      ],
+      "benificiair": [
+        {
+          "compteNumber": 4439843,
+          "firstName": "hamid",
+          "lastName": "Elkassri",
+          "email": "hamid@gmail.com"
+        },
+        {
+          "compteNumber": 4384383,
+          "firstName": "Malika",
+          "lastName": "Essaadi",
+          "email": "malika@gmail.com"
+        },
+        {
+          "compteNumber": 4433223,
+          "firstName": "Samawi",
+          "lastName": "Chomakhar",
+          "email": "samawi@gmail.com"
         }
       ],
       "firstName": "brahim",
       "lastName": "affais",
       "phone": 698787797,
-      "address": "marrakech ",
+      "address": "rabat",
       "email": "gogog@gmail.como",
       "isActive": true,
       "id": 2
@@ -31,12 +60,14 @@
         {
           "devise": "jjjkkj",
           "solde": 88,
-          "typeCompte": "standard"
+          "typeCompte": "standard",
+          "compteNumber": 222434
         },
         {
           "devise": "jjjkkj",
           "solde": 988,
-          "typeCompte": "standard"
+          "typeCompte": "standard",
+          "compteNumber": 222434
         }
       ],
       "firstName": "oussama",
@@ -46,6 +77,187 @@
       "email": "gogog@gmail.com",
       "isActive": true,
       "id": 3
+    },
+    {
+      "compts": [
+        {
+          "devise": "jjjkkj",
+          "solde": 44309,
+          "typeCompte": "standard",
+          "compteNumber": 222434
+        },
+        {
+          "devise": "jjjkkj",
+          "solde": 99,
+          "typeCompte": "premium",
+          "compteNumber": 222434
+        },
+        {
+          "solde": "888",
+          "typeCompte": "standard",
+          "devise": "fdjds",
+          "compteNumber": 222434
+        }
+      ],
+      "firstName": "oussama",
+      "lastName": "brahim",
+      "phone": 4545454394,
+      "address": "marrakech daoudiate",
+      "email": "gogog@gmail.com",
+      "isActive": true,
+      "id": 4
+    },
+    {
+      "compts": [
+        {
+          "devise": "jjjkkj",
+          "solde": 98998,
+          "typeCompte": "standard"
+        }
+      ],
+      "firstName": "kkjk",
+      "lastName": "jkjj",
+      "phone": 988998,
+      "address": "jkjkjjnj",
+      "email": "gogog@gmail.com",
+      "isActive": true,
+      "id": 5
     }
-  ]
+  ],
+  "comptes": [
+    {
+      "solde": "434343",
+      "typeCompte": "standard",
+      "devise": "okkl",
+      "compteNumber": 22332434,
+      "client": {
+        "compts": [
+          {
+            "devise": "jjjkkj",
+            "solde": 0,
+            "typeCompte": "standard"
+          },
+          {
+            "solde": "334",
+            "typeCompte": "premium",
+            "devise": "34343"
+          },
+          {
+            "solde": "2323",
+            "typeCompte": "standard",
+            "devise": "4344"
+          },
+          {
+            "solde": null,
+            "typeCompte": null,
+            "devise": null
+          },
+          {
+            "solde": "fdkfdk",
+            "typeCompte": "standard",
+            "devise": "ddkjds"
+          }
+        ],
+        "firstName": "brahim",
+        "lastName": "affais",
+        "phone": 698787797,
+        "address": "rabat",
+        "email": "gogog@gmail.como",
+        "isActive": true,
+        "id": 2
+      },
+      "id": 2
+    },
+    {
+      "solde": 344,
+      "typeCompte": "standard",
+      "devise": "dh",
+      "compteNumber": 222434,
+      "client": {
+        "compts": [
+          {
+            "devise": "jjjkkj",
+            "solde": 88,
+            "typeCompte": "standard"
+          },
+          {
+            "devise": "jjjkkj",
+            "solde": 988,
+            "typeCompte": "standard"
+          }
+        ],
+        "firstName": "oussama",
+        "lastName": "goumghar",
+        "phone": 0,
+        "address": "l,",
+        "email": "gogog@gmail.com",
+        "isActive": true,
+        "id": 3
+      },
+      "id": 3
+    }
+  ],
+  "transactions": [
+    {
+      "benificiare": {
+        "compteNumber": 4384383,
+        "firstName": "Malika",
+        "lastName": "Essaadi",
+        "email": "malika@gmail.com"
+      },
+      "discription": "kari",
+      "amounts": "3334",
+      "type": "VIREMENT",
+      "typeTransaction": "debit",
+      "compte": {
+        "solde": "334",
+        "typeCompte": "premium",
+        "devise": "34343",
+        "compteNumber": 222434
+      },
+      "name": "VIREMENT de montant 3334  versundefined",
+      "id": 1
+    },
+    {
+      "benificiare": {
+        "compteNumber": 4384383,
+        "firstName": "Malika",
+        "lastName": "Essaadi",
+        "email": "malika@gmail.com"
+      },
+      "discription": "kkk",
+      "amounts": "8787",
+      "type": "VIREMENT",
+      "typeTransaction": "debit",
+      "compte": {
+        "solde": "334",
+        "typeCompte": "premium",
+        "devise": "34343",
+        "compteNumber": 222434
+      },
+      "name": "VIREMENT de montant 8787  versundefined",
+      "id": 2
+    },
+    {
+      "benificiare": {
+        "compteNumber": 4384383,
+        "firstName": "Malika",
+        "lastName": "Essaadi",
+        "email": "malika@gmail.com"
+      },
+      "discription": "kiraa2",
+      "amounts": "343498",
+      "type": "VIREMENT",
+      "typeTransaction": "debit",
+      "compte": {
+        "solde": "334",
+        "typeCompte": "premium",
+        "devise": "34343",
+        "compteNumber": 222434
+      },
+      "name": "VIREMENT de montant 343498  versundefined",
+      "id": 3
+    }
+  ],
+  "benificiaire": []
 }

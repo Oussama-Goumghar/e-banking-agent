@@ -156,7 +156,7 @@ export class AccueilComponent implements OnInit {
     var speedCanvas = document.getElementById("speedChart");
 
     var dataFirst = {
-      data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
+      data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70,33,6,77,0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70,33,6,77],
       fill: false,
       borderColor: '#fbc658',
       backgroundColor: 'transparent',
@@ -167,7 +167,7 @@ export class AccueilComponent implements OnInit {
     };
 
     var dataSecond = {
-      data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
+      data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63,34,12,6,77, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63,34,12,6],
       fill: false,
       borderColor: '#51CACF',
       backgroundColor: 'transparent',
@@ -181,7 +181,7 @@ export class AccueilComponent implements OnInit {
     };
 
     var speedData = {
-      labels: ["1", "1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      labels: ["1", "2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],
       datasets: [dataFirst, dataSecond]
     };
 

@@ -12,7 +12,7 @@ import {ClientService} from '../../Core/Services/client.service';
 export class AjouterUnClinetComponent implements OnInit {
   validateForm!: FormGroup;
   ComteForm!: FormGroup;
-  clientNew: Client = {compts: []}
+  clientNew: Client = {accounts: []}
 
 
   constructor(private fb: FormBuilder, private message: NzMessageService, private clientService: ClientService) {
@@ -25,6 +25,7 @@ export class AjouterUnClinetComponent implements OnInit {
       phone: [null, [Validators.required]],
       address: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
+      cin: [null, [Validators.required]],
       checkEmail: [null, [Validators.required, this.confirmationValidator]],
     });
     this.ComteForm = this.fb.group({
@@ -44,17 +45,20 @@ export class AjouterUnClinetComponent implements OnInit {
     if (this.validateForm?.invalid) {
       return
     }
-    this.clientNew.firstName = this.validateForm.controls.firstName.value
-    this.clientNew.lastName = this.validateForm.controls.lastName.value
-    this.clientNew.phone = this.validateForm.controls.phone.value
-    this.clientNew.address = this.validateForm.controls.address.value
+    this.clientNew.firstname = this.validateForm.controls.firstName.value
+    this.clientNew.lastname = this.validateForm.controls.lastName.value
+    this.clientNew.tele = this.validateForm.controls.phone.value
+    this.clientNew.adress = this.validateForm.controls.address.value
     this.clientNew.email = this.validateForm.controls.email.value
-    this.clientNew.isActive = true
+    this.clientNew.cin=this.validateForm.controls.cin.value
+    this.clientNew.password=this.validateForm.controls.cin.value
+
+
 
 
     this.clientService.saveClient(this.clientNew).subscribe(data => {
       this.validateForm.reset();
-      this.clientNew = {compts: []}
+      this.clientNew = {accounts: []}
       alert('succsess')
     })
 
@@ -90,14 +94,14 @@ export class AjouterUnClinetComponent implements OnInit {
     if (this.ComteForm?.invalid) {
       return
     }
-    this.clientNew.compts.push({
-      devise: this.ComteForm.controls.devise.value,
-      solde: this.ComteForm.controls.solde.value, typeCompte: this.ComteForm.controls.typeCompte.value
+    this.clientNew.accounts.push({
+      currency: this.ComteForm.controls.devise.value,
+      balance: this.ComteForm.controls.solde.value, type: this.ComteForm.controls.typeCompte.value
     })
     this.ComteForm.reset()
   }
 
   deletetCompte(i: number) {
-    this.clientNew.compts.splice(i, 1)
+    this.clientNew.accounts.splice(i, 1)
   }
 }

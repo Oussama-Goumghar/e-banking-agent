@@ -7,6 +7,7 @@ import {catchError, map, startWith} from 'rxjs/operators';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Compte} from '../../Core/Models/compte.model';
+import {CompteService} from '../../Core/Services/compte.service';
 
 
 @Component({
@@ -15,14 +16,19 @@ import {Compte} from '../../Core/Models/compte.model';
   styleUrls: ['./nos-clients.component.css']
 })
 export class NosClientsComponent implements OnInit {
-  clients$: Observable<AppDataState<Client[]>> | null=null;
-  DataStateEnum=DataStateEnum
+  clients$: Observable<AppDataState<Client[]>> | null = null;
+  clientOringins: Observable<AppDataState<Client[]>> | null = null;
+  DataStateEnum = DataStateEnum
   ClientForm!: FormGroup;
   CompteForm!: FormGroup;
-  clientUpdate: Client = {compts: []}
-  compteAdd:Compte={}
+  clientUpdate: Client = {accounts: []}
+  compteAdd: Compte = {}
 
-  constructor(private clientService:ClientService,private modal: NzModalService,private fb: FormBuilder) { }
+  searchValue = '';
+  visible = false;
+
+  constructor(private clientService: ClientService, private compteService:CompteService,private modal: NzModalService, private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
 
@@ -30,59 +36,79 @@ export class NosClientsComponent implements OnInit {
   }
 
 
-  OnGetAllClients(){
-    this.clients$=this.clientService.getAllClients().pipe(
-      map(data=>{
-        return ({dataState:DataStateEnum.LOADED,data:data})}),
-      startWith({dataState:DataStateEnum.LOADING}),
-      catchError(err=>of({dataState:DataStateEnum.Error,errorMessage:err.message}))
+  OnGetAllClients() {
+    this.clients$ = this.clientService.getAllClients().pipe(
+      map(data => {
+        return ({dataState: DataStateEnum.LOADED, data: data})
+      }),
+      startWith({dataState: DataStateEnum.LOADING}),
+      catchError(err => of({dataState: DataStateEnum.Error, errorMessage: err.message}))
+    )
+
+    console.log(this.clients$);
+
+    this.clientOringins = this.clientService.getAllClients().pipe(
+      map(data => {
+        return ({dataState: DataStateEnum.LOADED, data: data})
+      }),
+      startWith({dataState: DataStateEnum.LOADING}),
+      catchError(err => of({dataState: DataStateEnum.Error, errorMessage: err.message}))
     )
   }
 
   displayAlert() {
-    alert("Prof approved")
-
+    alert('Prof approved')
   }
 
 
-  disableClient(client:Client) {
-    this.clientService.desactivateClient(client).subscribe(data=>{
-      client.isActive=data.isActive
-    })
-  }
-
-  deleteClient(client:Client){
-    this.clientService.deleteClient(client).subscribe(data=>{
+  disableClient(client: Client) {
+    this.clientService.desactivateClient(client).subscribe(data => {
       this.OnGetAllClients()
     })
   }
 
-  updateClient(){
-    this.clientUpdate.firstName=this.ClientForm.controls.firstName.value
-    this.clientUpdate.lastName=this.ClientForm.controls.lastName.value
-    this.clientUpdate.phone=this.ClientForm.controls.phone.value
-    this.clientUpdate.address=this.ClientForm.controls.address.value
-    this.clientUpdate.email=this.ClientForm.controls.email.value
-    this.clientService.updateClient(this.clientUpdate).subscribe(data=>{
-      this.clientUpdate=data
+  deleteClient(client: Client) {
+    this.clientService.deleteClient(client).subscribe(data => {
+      this.OnGetAllClients()
     })
   }
-  AddCompte(){
+
+  updateClient() {
+    this.clientUpdate.firstname = this.ClientForm.controls.firstName.value
+    this.clientUpdate.lastname = this.ClientForm.controls.lastName.value
+    this.clientUpdate.cin = this.ClientForm.controls.cin.value
+    this.clientUpdate.adress = this.ClientForm.controls.address.value
+    this.clientUpdate.email = this.ClientForm.controls.email.value
+    this.clientService.updateClient(this.clientUpdate).subscribe(data => {
+      this.clientUpdate = data
+    })
+  }
+
+  AddCompte() {
     for (const i in this.CompteForm.controls) {
       this.CompteForm.controls[i].markAsDirty();
       this.CompteForm.controls[i].updateValueAndValidity();
     }
-   this.compteAdd.solde=this.CompteForm.controls.solde.value
-   this.compteAdd.typeCompte=this.CompteForm.controls.typeCompte.value
-   this.compteAdd.devise=this.CompteForm.controls.devise.value
+    this.compteAdd.balance = this.CompteForm.controls.solde.value
+    this.compteAdd.type = this.CompteForm.controls.typeCompte.value
+    this.compteAdd.currency = this.CompteForm.controls.devise.value
+    this.compteAdd.client=this.clientUpdate
 
-    this.clientUpdate.compts.push(this.compteAdd)
-    this.clientService.updateClient(this.clientUpdate).subscribe(data=>{
+    this.compteService.SaveCompte(this.compteAdd).subscribe(()=>{
+      this.OnGetAllClients()
+    });
+
+    this.clientService.updateClient(this.clientUpdate).subscribe(data => {
       this.OnGetAllClients()
     })
   }
 
+  deleteCompte(compte: Compte) {
+    this.compteService.deleteClient(compte).subscribe()
+  }
+
   expandSet = new Set<number>();
+
   onExpandChange(id: number, checked: boolean): void {
     if (checked) {
       this.expandSet.add(id);
@@ -91,15 +117,15 @@ export class NosClientsComponent implements OnInit {
     }
   }
 
-  createTplModal( tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>,client:Client): void {
+  createTplModal(tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>, client: Client): void {
 
-    this.clientUpdate=client
-    this.ClientForm=this.fb.group({
-      firstName: [this.clientUpdate.firstName, [Validators.required]],
-      lastName: [this.clientUpdate.lastName, [Validators.required]],
-      phone: [this.clientUpdate.phone, [Validators.required]],
-      address: [this.clientUpdate.address, [Validators.required]],
-      email: [this.clientUpdate.email, [Validators.email,Validators.required]],
+    this.clientUpdate = client
+    this.ClientForm = this.fb.group({
+      firstName: [this.clientUpdate.firstname, [Validators.required]],
+      lastName: [this.clientUpdate.lastname, [Validators.required]],
+      cin: [this.clientUpdate.cin, [Validators.required]],
+      address: [this.clientUpdate.adress, [Validators.required]],
+      email: [this.clientUpdate.email, [Validators.email, Validators.required]],
     })
 
     this.modal.create({
@@ -107,7 +133,7 @@ export class NosClientsComponent implements OnInit {
       nzContent: tplContent,
       nzFooter: tplFooter,
       nzMaskClosable: false,
-      nzWidth:500,
+      nzWidth: 500,
 
       nzClosable: false,
       nzComponentParams: {
@@ -117,12 +143,13 @@ export class NosClientsComponent implements OnInit {
     });
   }
 
-  createCompteModal( CompteContent: TemplateRef<{}>, CompteFooter: TemplateRef<{}>,client:Client): void {
-    this.clientUpdate=client
 
-    this.CompteForm=this.fb.group({
+  createCompteModal(CompteContent: TemplateRef<{}>, CompteFooter: TemplateRef<{}>, client: Client): void {
+    this.clientUpdate = client
+
+    this.CompteForm = this.fb.group({
       devise: [null, [Validators.required]],
-      solde: [null, [Validators.required]],
+      solde: [0, [Validators.required]],
       typeCompte: [null, [Validators.required]],
     })
 
@@ -131,7 +158,7 @@ export class NosClientsComponent implements OnInit {
       nzContent: CompteContent,
       nzFooter: CompteFooter,
       nzMaskClosable: false,
-      nzWidth:500,
+      nzWidth: 500,
 
       nzClosable: false,
       nzComponentParams: {
@@ -139,5 +166,15 @@ export class NosClientsComponent implements OnInit {
       },
       nzOnOk: () => console.log('Click ok')
     });
+  }
+
+  reset(): void {
+    this.searchValue = '';
+    this.search();
+  }
+
+  search(): void {
+    this.visible = false;
+
   }
 }
