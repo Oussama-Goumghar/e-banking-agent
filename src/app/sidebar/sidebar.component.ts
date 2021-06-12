@@ -17,7 +17,6 @@ export const ROUTES: RouteInfo[] = [
   { path: '/Agence/Accueil', id: 'Accueil', title: 'Accueil', icon: 'home', class: '', hasSubMen: true,},
   { path: '/Agence/nos-clients', id: 'Ma', title: 'nos clients', icon: 'supervisor_account', hasSubMen: false, class: ''},
   { path: '/Agence/ajouter-un-clinet', id: 'Mess', title: 'ajouter un client', icon: 'get_app', class: ''},
-  { path: '/Agence/transactions', id: 'Mes', title: 'Transactions', icon: 'paid', class: '' },
   { path: '/Agence/Accueil', id: 'Mes', title: 'Me Deconnecter ', icon: 'logout', class: 'active-pro' },
 
 
